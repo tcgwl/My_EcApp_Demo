@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#64ffffff"/>
+    <!--纯园，弧度值超大的话，超出的重叠-->
+    <corners android:radius="1000dp"/>
+</shape>
