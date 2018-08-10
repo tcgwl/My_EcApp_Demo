@@ -32,8 +32,10 @@ public abstract class BaseDelegate extends SwipeBackFragment {
         } else {
             throw new ClassCastException("setLayout() type must be int or View!");
         }
-        mUnbinder = ButterKnife.bind(this, rootView);
-        onBindView(savedInstanceState, rootView);
+        if (rootView != null) {
+            mUnbinder = ButterKnife.bind(this, rootView);
+            onBindView(savedInstanceState, rootView);
+        }
         return rootView;
     }
 
