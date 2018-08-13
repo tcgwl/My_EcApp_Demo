@@ -24,7 +24,9 @@ public class SignHandler {
 
         //已经注册并登录成功了
         AccountManager.setSignState(true);
-        signListener.onSignUpSuccess();
+        if (signListener != null) {
+            signListener.onSignUpSuccess();
+        }
     }
 
     public static void onSignIn(String response, ISignListener signListener) {
@@ -40,6 +42,8 @@ public class SignHandler {
 
         //登录成功了
         AccountManager.setSignState(true);
-        signListener.onSignInSuccess();
+        if (signListener != null) {
+            signListener.onSignInSuccess();
+        }
     }
 }

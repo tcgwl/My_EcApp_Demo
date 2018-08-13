@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 public final class ItemBuilder {
     private final LinkedHashMap<BottomTabBean, BottomItemDelegate> ITEMS = new LinkedHashMap<>();
 
+    //简单工厂模式
     static ItemBuilder builder() {
         return new ItemBuilder();
     }

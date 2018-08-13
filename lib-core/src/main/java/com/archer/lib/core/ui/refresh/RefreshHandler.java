@@ -1,4 +1,4 @@
-package com.archer.lib.ui.refresh;
+package com.archer.lib.core.ui.refresh;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
@@ -31,6 +31,7 @@ public class RefreshHandler implements
         Latte.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //进行一些网络请求
                 REFRESH_LAYOUT.setRefreshing(false);
             }
         }, 2000);

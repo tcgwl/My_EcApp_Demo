@@ -10,7 +10,6 @@ import com.archer.lib.core.app.Latte;
 import com.archer.lib.core.delegates.LatteDelegate;
 import com.archer.lib.core.ui.launcher.ILauncherListener;
 import com.archer.lib.core.ui.launcher.OnLauncherFinishTag;
-import com.archer.lib.ec.launcher.LauncherDelegate;
 import com.archer.lib.ec.main.EcBottomDelegate;
 import com.archer.lib.ec.sign.ISignListener;
 import com.archer.lib.ec.sign.SignInDelegate;
@@ -31,7 +30,7 @@ public class DemoActivity extends ProxyActivity implements
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override

@@ -30,7 +30,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile project(':lib-ui')
+    compile project(':lib-core')
     //圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
 }

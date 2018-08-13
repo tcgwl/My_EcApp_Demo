@@ -17,6 +17,7 @@ public abstract class BottomItemDelegate extends LatteDelegate {
     public boolean onBackPressedSupport() {
         if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
             _mActivity.finish();
+            TOUCH_TIME = 0;
         } else {
             TOUCH_TIME = System.currentTimeMillis();
             Toast.makeText(_mActivity, "双击退出应用", Toast.LENGTH_SHORT).show();

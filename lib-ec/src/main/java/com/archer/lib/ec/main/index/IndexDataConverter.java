@@ -3,10 +3,10 @@ package com.archer.lib.ec.main.index;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.archer.lib.ui.recycler.DataConverter;
-import com.archer.lib.ui.recycler.ItemType;
-import com.archer.lib.ui.recycler.MultipleFields;
-import com.archer.lib.ui.recycler.MultipleItemEntity;
+import com.archer.lib.core.ui.recycler.DataConverter;
+import com.archer.lib.core.ui.recycler.ItemType;
+import com.archer.lib.core.ui.recycler.MultipleFields;
+import com.archer.lib.core.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
 

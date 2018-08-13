@@ -1,4 +1,4 @@
-package com.archer.lib.ui.refresh;
+package com.archer.lib.core.ui.refresh;
 
 /**
  * Created by Archer on 2018/2/28.

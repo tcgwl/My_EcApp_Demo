@@ -1,4 +1,4 @@
-package com.archer.lib.ui.recycler;
+package com.archer.lib.core.ui.recycler;
 
 /**
  * Created by Archer on 2018/3/1.

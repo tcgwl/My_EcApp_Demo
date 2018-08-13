@@ -1,4 +1,4 @@
-package com.archer.lib.ui.recycler;
+package com.archer.lib.core.ui.recycler;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 

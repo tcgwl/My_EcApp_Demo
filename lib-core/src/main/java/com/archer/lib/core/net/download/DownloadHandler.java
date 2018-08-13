@@ -58,10 +58,14 @@ public final class DownloadHandler {
                 if (response.isSuccessful()) {
                     final ResponseBody responseBody = response.body();
                     final SaveFileTask task = new SaveFileTask(REQUEST, SUCCESS);
+                    //task.execute: 以队列执行任务
+                    //task.executeOnExecutor: 以线程池的形式执行
                     task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DOWNLOAD_DIR, EXTENSION, responseBody, NAME);
                     //这里一定要注意判断，否则文件下载不全
                     if (task.isCancelled()) {
-                        REQUEST.onRequestEnd();
+                        if (REQUEST != null) {
+                            REQUEST.onRequestEnd();
+                        }
                     }
                 } else {
                     if (ERROR != null) {

@@ -12,11 +12,11 @@ import android.widget.Toast;
 import com.archer.lib.core.delegates.bottom.BottomItemDelegate;
 import com.archer.lib.core.net.RestClient;
 import com.archer.lib.core.net.callback.ISuccess;
+import com.archer.lib.core.ui.recycler.MultipleFields;
+import com.archer.lib.core.ui.recycler.MultipleItemEntity;
+import com.archer.lib.core.ui.refresh.RefreshHandler;
 import com.archer.lib.ec.R;
 import com.archer.lib.ec.R2;
-import com.archer.lib.ui.recycler.MultipleFields;
-import com.archer.lib.ui.recycler.MultipleItemEntity;
-import com.archer.lib.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;

@@ -49,7 +49,7 @@ public class LatteWeChat {
 
     public final void signIn() {
         final SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";
+        req.scope = "snsapi_userinfo"; //微信规定的字符串
         req.state = "random_state";
         WXAPI.sendReq(req);
     }

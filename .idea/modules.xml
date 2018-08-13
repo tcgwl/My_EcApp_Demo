@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/lib-compiler/lib-compiler.iml" filepath="$PROJECT_DIR$/lib-compiler/lib-compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib-core/lib-core.iml" filepath="$PROJECT_DIR$/lib-core/lib-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib-ec/lib-ec.iml" filepath="$PROJECT_DIR$/lib-ec/lib-ec.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib-ui/lib-ui.iml" filepath="$PROJECT_DIR$/lib-ui/lib-ui.iml" />
     </modules>
   </component>
 </project>
