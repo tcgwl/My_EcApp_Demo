@@ -2,9 +2,14 @@ package com.archer.lib.core.app;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
+import com.archer.lib.core.delegates.web.event.Event;
+import com.archer.lib.core.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +47,7 @@ public class Configurator {
 
     public final void configure() {
         initIcons();
+        Logger.addLogAdapter(new AndroidLogAdapter());
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
@@ -93,6 +99,22 @@ public class Configurator {
 
     public final Configurator withActivity(Activity activity) {
         LATTE_CONFIGS.put(ConfigKeys.ACTIVITY, activity);
+        return this;
+    }
+
+    public Configurator withJavascriptInterface(@NonNull String name) {
+        LATTE_CONFIGS.put(ConfigKeys.JAVASCRIPT_INTERFACE, name);
+        return this;
+    }
+
+    public Configurator withWebEvent(@NonNull String action, @NonNull Event event) {
+        EventManager.getInstance().addEvent(action, event);
+        return this;
+    }
+
+    //浏览器加载的HOST
+    public Configurator withWebHost(String host) {
+        LATTE_CONFIGS.put(ConfigKeys.WEB_HOST, host);
         return this;
     }
 

@@ -1,9 +1,5 @@
 package com.archer.lib.core.ui.refresh;
 
-/**
- * Created by Archer on 2018/2/28.
- */
-
 public final class PagingBean {
     //当前是第几页
     private int mPageIndex = 0;

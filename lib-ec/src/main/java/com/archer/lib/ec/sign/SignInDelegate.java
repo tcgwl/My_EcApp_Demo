@@ -48,8 +48,8 @@ public class SignInDelegate extends LatteDelegate {
         if (checkForm()) {
             Toast.makeText(Latte.getApplicationContext(), "验证通过", Toast.LENGTH_SHORT).show();
             RestClient.builder()
-//                    .url("http://127.0.0.1/index")
-                    .url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
+                    //.url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
+                    .url("user_profile.php")
                     .parmas("email", mEmailEt.getText().toString())
                     .parmas("password", mPasswordEt.getText().toString())
                     .success(new ISuccess() {

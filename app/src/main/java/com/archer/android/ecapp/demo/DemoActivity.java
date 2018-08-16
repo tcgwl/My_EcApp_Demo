@@ -10,9 +10,12 @@ import com.archer.lib.core.app.Latte;
 import com.archer.lib.core.delegates.LatteDelegate;
 import com.archer.lib.core.ui.launcher.ILauncherListener;
 import com.archer.lib.core.ui.launcher.OnLauncherFinishTag;
+import com.archer.lib.ec.launcher.LauncherDelegate;
 import com.archer.lib.ec.main.EcBottomDelegate;
 import com.archer.lib.ec.sign.ISignListener;
 import com.archer.lib.ec.sign.SignInDelegate;
+
+import qiu.niorgai.StatusBarCompat;
 
 public class DemoActivity extends ProxyActivity implements 
         ISignListener,
@@ -26,11 +29,12 @@ public class DemoActivity extends ProxyActivity implements
             actionBar.hide();
         }
         Latte.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new EcBottomDelegate();
+        return new LauncherDelegate();
     }
 
     @Override

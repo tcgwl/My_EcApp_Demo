@@ -1,25 +1,23 @@
 package com.archer.lib.ec.main.index;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.archer.lib.core.delegates.bottom.BottomItemDelegate;
-import com.archer.lib.core.net.RestClient;
-import com.archer.lib.core.net.callback.ISuccess;
-import com.archer.lib.core.ui.recycler.MultipleFields;
-import com.archer.lib.core.ui.recycler.MultipleItemEntity;
+import com.archer.lib.core.ui.recycler.BaseDecoration;
 import com.archer.lib.core.ui.refresh.RefreshHandler;
 import com.archer.lib.ec.R;
 import com.archer.lib.ec.R2;
+import com.archer.lib.ec.main.EcBottomDelegate;
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -43,21 +41,7 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        RestClient.builder()
-                .url("index.php")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        final IndexDataConverter converter = new IndexDataConverter();
-                        converter.setJsonData(response);
-                        final ArrayList<MultipleItemEntity> list = converter.convert();
-                        final String imgUrl = list.get(1).getField(MultipleFields.IMAGE_URL);
-                        Toast.makeText(getContext(), imgUrl, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build()
-                .get();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
     }
 
     private void initRefreshLayout() {
@@ -69,10 +53,23 @@ public class IndexDelegate extends BottomItemDelegate {
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
 
+    private void initRecyclerView() {
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
+        mRecyclerView.setLayoutManager(manager);
+        final Context context = getContext();
+        if (context != null) {
+            mRecyclerView.addItemDecoration
+                    (BaseDecoration.create(ContextCompat.getColor(context, R.color.app_background), 5));
+        }
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+    }
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerView();
         mRefreshHandler.firstPage("index.php");
     }
 

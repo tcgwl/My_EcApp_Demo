@@ -2,8 +2,10 @@ package com.archer.android.ecapp.demo;
 
 import android.app.Application;
 
+import com.archer.android.ecapp.demo.event.TestEvent;
 import com.archer.lib.core.app.Latte;
 import com.archer.lib.core.net.interceptors.DebugInterceptor;
+import com.archer.lib.core.net.rx.AddCookieInterceptor;
 import com.archer.lib.ec.database.DatabaseManager;
 import com.archer.lib.ec.icon.FontEcModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -23,7 +25,16 @@ public class DemoApp extends Application {
                 .withApiHost("http://192.168.1.145:8080/RestServer/api/")
                 .withWeChatAppId("你的微信AppKey")
                 .withWeChatAppSecret("你的微信AppSecret")
+                .withJavascriptInterface("latte")
+                .withWebEvent("test", new TestEvent())
+                //添加Cookie同步拦截器
+                .withWebHost("https://www.baidu.com/")
+                .withInterceptor(new AddCookieInterceptor())
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
+                .withInterceptor(new DebugInterceptor("user_profile.php", R.raw.user_profile))
+                .withInterceptor(new DebugInterceptor("index.php", R.raw.index_data))
+                .withInterceptor(new DebugInterceptor("sort_list.php", R.raw.sort_list_data))
+                .withInterceptor(new DebugInterceptor("sort_content_list.php", R.raw.sort_content_data_1))
                 .configure();
 //        initStetho();
         DatabaseManager.getInstance().init(this);
