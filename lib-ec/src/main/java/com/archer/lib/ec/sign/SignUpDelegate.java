@@ -52,10 +52,10 @@ public class SignUpDelegate extends LatteDelegate {
             RestClient.builder()
 //                    .url("http://127.0.0.1/index")
                     .url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
-                    .parmas("name", mNameEt.getText().toString())
-                    .parmas("email", mNameEt.getText().toString())
-                    .parmas("phone", mNameEt.getText().toString())
-                    .parmas("password", mNameEt.getText().toString())
+                    .params("name", mNameEt.getText().toString())
+                    .params("email", mNameEt.getText().toString())
+                    .params("phone", mNameEt.getText().toString())
+                    .params("password", mNameEt.getText().toString())
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {

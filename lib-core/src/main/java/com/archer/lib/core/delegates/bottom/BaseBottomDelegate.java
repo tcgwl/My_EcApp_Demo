@@ -117,4 +117,5 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         //注意先后顺序
         mCurrentDelegate = tag;
     }
+
 }

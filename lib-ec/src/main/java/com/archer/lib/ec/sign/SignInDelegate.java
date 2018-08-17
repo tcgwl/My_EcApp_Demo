@@ -50,8 +50,8 @@ public class SignInDelegate extends LatteDelegate {
             RestClient.builder()
                     //.url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
                     .url("user_profile.php")
-                    .parmas("email", mEmailEt.getText().toString())
-                    .parmas("password", mPasswordEt.getText().toString())
+                    .params("email", mEmailEt.getText().toString())
+                    .params("password", mPasswordEt.getText().toString())
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {

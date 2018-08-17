@@ -25,8 +25,12 @@ public class WebViewClientImpl extends WebViewClient {
         this.mIPageLoadListener = listener;
     }
 
-    public WebViewClientImpl(WebDelegate delegate) {
+    private WebViewClientImpl(WebDelegate delegate) {
         this.DELEGATE = delegate;
+    }
+
+    public static WebViewClientImpl create(WebDelegate delegate) {
+        return new WebViewClientImpl(delegate);
     }
 
     @Override

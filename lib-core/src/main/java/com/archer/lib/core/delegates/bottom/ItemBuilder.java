@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
  */
 
 public final class ItemBuilder {
+    //有序的HashMap
     private final LinkedHashMap<BottomTabBean, BottomItemDelegate> ITEMS = new LinkedHashMap<>();
 
     //简单工厂模式
