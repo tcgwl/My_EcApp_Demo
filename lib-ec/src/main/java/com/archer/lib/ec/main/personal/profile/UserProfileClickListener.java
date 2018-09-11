@@ -1,26 +1,30 @@
-package com.flj.latte.ec.main.personal.profile;
+package com.archer.lib.ec.main.personal.profile;
 
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.archer.lib.core.delegates.LatteDelegate;
+import com.archer.lib.core.net.RestClient;
+import com.archer.lib.core.net.callback.IError;
+import com.archer.lib.core.net.callback.IFailure;
+import com.archer.lib.core.net.callback.ISuccess;
+import com.archer.lib.core.ui.camera.LatteCamera;
+import com.archer.lib.core.ui.date.DateDialogUtil;
+import com.archer.lib.core.util.callback.CallbackManager;
+import com.archer.lib.core.util.callback.CallbackType;
+import com.archer.lib.core.util.callback.IGlobalCallback;
+import com.archer.lib.core.util.log.LatteLogger;
+import com.archer.lib.ec.R;
+import com.archer.lib.ec.main.personal.list.ListBean;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
-import com.diabin.latte.ec.R;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.ec.main.personal.list.ListBean;
-import com.flj.latte.net.RestClient;
-import com.flj.latte.net.callback.ISuccess;
-import com.flj.latte.ui.date.DateDialogUtil;
-import com.flj.latte.util.callback.CallbackManager;
-import com.flj.latte.util.callback.CallbackType;
-import com.flj.latte.util.callback.IGlobalCallback;
-import com.flj.latte.util.log.LatteLogger;
 
 /**
  * Created by 傅令杰
@@ -45,46 +49,62 @@ public class UserProfileClickListener extends SimpleClickListener {
                 //开始照相机或选择图片
                 CallbackManager.getInstance()
                         .addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>() {
-                            @Override
-                            public void executeCallback(Uri args) {
-                                LatteLogger.d("ON_CROP", args);
-                                final ImageView avatar = (ImageView) view.findViewById(R.id.img_arrow_avatar);
-                                Glide.with(DELEGATE)
-                                        .load(args)
-                                        .into(avatar);
+                    @Override
+                    public void executeCallback(Uri args) {
+                        LatteLogger.d("ON_CROP", args);
+                        final ImageView avatar = (ImageView) view.findViewById(R.id.img_arrow_avatar);
+                        Glide.with(DELEGATE)
+                                .load(args)
+                                .into(avatar);
 
-                                RestClient.builder()
-                                        .url(UploadConfig.UPLOAD_IMG)
-                                        .loader(DELEGATE.getContext())
-                                        .file(args.getPath())
-                                        .success(new ISuccess() {
-                                            @Override
-                                            public void onSuccess(String response) {
-                                                LatteLogger.d("ON_CROP_UPLOAD", response);
-                                                final String path = JSON.parseObject(response).getJSONObject("result")
-                                                        .getString("path");
+                        RestClient.builder()
+                                .url(UploadConfig.UPLOAD_IMG)
+                                .loader(DELEGATE.getContext())
+                                .file(args.getPath())
+                                .success(new ISuccess() {
+                                    @Override
+                                    public void onSuccess(String response) {
+                                        LatteLogger.d("ON_CROP_UPLOAD", response);
+                                        final String path = JSON.parseObject(response).getJSONObject("result")
+                                                .getString("path");
 
-                                                //通知服务器更新信息
-                                                RestClient.builder()
-                                                        .url("user_profile.php")
-                                                        .params("avatar", path)
-                                                        .loader(DELEGATE.getContext())
-                                                        .success(new ISuccess() {
-                                                            @Override
-                                                            public void onSuccess(String response) {
-                                                                //获取更新后的用户信息，然后更新本地数据库
-                                                                //没有本地数据的APP，每次打开APP都请求API，获取信息
-                                                            }
-                                                        })
-                                                        .build()
-                                                        .post();
-                                            }
-                                        })
-                                        .build()
-                                        .upload();
-                            }
-                        });
-                DELEGATE.startCameraWithCheck();
+                                        //通知服务器更新信息
+                                        RestClient.builder()
+                                                .url("user_profile.php")
+                                                .params("avatar", path)
+                                                .loader(DELEGATE.getContext())
+                                                .success(new ISuccess() {
+                                                    @Override
+                                                    public void onSuccess(String response) {
+                                                        //获取更新后的用户信息，然后更新本地数据库
+                                                        //没有本地数据的APP，每次打开APP都请求API，获取信息
+                                                    }
+                                                })
+                                                .build()
+                                                .post();
+                                    }
+                                })
+                                .error(new IError() {
+                                    @Override
+                                    public void onError(int code, String msg) {
+                                        LatteLogger.d("ON_CROP_UPLOAD", "上传错误");
+                                    }
+                                })
+                                .failure(new IFailure() {
+                                    @Override
+                                    public void onFailure() {
+                                        LatteLogger.d("ON_CROP_UPLOAD", "上传失败");
+                                    }
+                                })
+                                .build()
+                                .upload();
+                    }
+                });
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    DELEGATE.startCameraWithCheck();
+                } else {
+                    LatteCamera.start(DELEGATE);
+                }
                 break;
             case 2:
                 final LatteDelegate nameDelegate = bean.getDelegate();

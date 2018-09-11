@@ -1,8 +1,4 @@
-package com.flj.latte.ec.pay;
-
-/**
- * Created by 傅令杰
- */
+package com.archer.lib.ec.pay;
 
 public interface IAlPayResultListener {
 

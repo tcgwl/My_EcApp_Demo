@@ -1,17 +1,17 @@
-package com.flj.latte.ec.main.personal.order;
+package com.archer.lib.ec.main.personal.order;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 
+import com.archer.lib.core.ui.recycler.MultipleFields;
+import com.archer.lib.core.ui.recycler.MultipleItemEntity;
+import com.archer.lib.core.ui.recycler.MultipleRecyclerAdapter;
+import com.archer.lib.core.ui.recycler.MultipleViewHolder;
+import com.archer.lib.ec.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.diabin.latte.ec.R;
-import com.flj.latte.ui.recycler.MultipleFields;
-import com.flj.latte.ui.recycler.MultipleItemEntity;
-import com.flj.latte.ui.recycler.MultipleRecyclerAdapter;
-import com.flj.latte.ui.recycler.MultipleViewHolder;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class OrderListAdapter extends MultipleRecyclerAdapter {
             .centerCrop()
             .dontAnimate();
 
-    protected OrderListAdapter(List<MultipleItemEntity> data) {
+    OrderListAdapter(List<MultipleItemEntity> data) {
         super(data);
         addItemType(OrderListItemType.ITEM_ORDER_LIST, R.layout.item_order_list);
     }

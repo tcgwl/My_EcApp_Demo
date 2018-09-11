@@ -10,7 +10,6 @@ import com.archer.lib.core.app.Latte;
 import com.archer.lib.core.delegates.LatteDelegate;
 import com.archer.lib.core.ui.launcher.ILauncherListener;
 import com.archer.lib.core.ui.launcher.OnLauncherFinishTag;
-import com.archer.lib.ec.launcher.LauncherDelegate;
 import com.archer.lib.ec.main.EcBottomDelegate;
 import com.archer.lib.ec.sign.ISignListener;
 import com.archer.lib.ec.sign.SignInDelegate;
@@ -34,7 +33,7 @@ public class DemoActivity extends ProxyActivity implements
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override
@@ -52,14 +51,19 @@ public class DemoActivity extends ProxyActivity implements
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_SHORT).show();
-                startWithPop(new EcBottomDelegate());
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_SHORT).show();
-                startWithPop(new SignInDelegate());
+                getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 }

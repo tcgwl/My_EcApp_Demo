@@ -1,4 +1,4 @@
-package com.flj.latte.ui.widget;
+package com.archer.lib.core.ui.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flj.latte.ui.R;
+import com.archer.lib.core.R;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;

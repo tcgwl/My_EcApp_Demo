@@ -15,32 +15,23 @@ import com.archer.lib.core.delegates.bottom.BottomItemDelegate;
 import com.archer.lib.core.ui.recycler.BaseDecoration;
 import com.archer.lib.core.ui.refresh.RefreshHandler;
 import com.archer.lib.ec.R;
-import com.archer.lib.ec.R2;
 import com.archer.lib.ec.main.EcBottomDelegate;
 import com.joanzapata.iconify.widget.IconTextView;
-
-import butterknife.BindView;
 
 /**
  * Created by Archer on 2018/2/27.
  */
 
 public class IndexDelegate extends BottomItemDelegate {
-    @BindView(R2.id.rv_index)
     RecyclerView mRecyclerView = null;
-    @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout = null;
-    @BindView(R2.id.tb_index)
-    Toolbar mToolbar = null;
-    @BindView(R2.id.icon_index_scan)
-    IconTextView mIconScan = null;
-    @BindView(R2.id.et_search_view)
-    AppCompatEditText mSearchView = null;
 
     private RefreshHandler mRefreshHandler = null;
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        mRecyclerView = $(R.id.rv_index);
+        mRefreshLayout = $(R.id.srl_index);
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
     }
 

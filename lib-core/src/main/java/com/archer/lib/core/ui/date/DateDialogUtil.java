@@ -1,4 +1,4 @@
-package com.flj.latte.ui.date;
+package com.archer.lib.core.ui.date;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,7 +44,7 @@ public class DateDialogUtil {
                 calendar.set(year, monthOfYear, dayOfMonth);
                 final SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
                 final String data = format.format(calendar.getTime());
-                if(mDateListener!=null){
+                if(mDateListener != null) {
                     mDateListener.onDateChange(data);
                 }
             }

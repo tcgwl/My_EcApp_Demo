@@ -14,25 +14,16 @@ import com.archer.lib.core.net.RestClient;
 import com.archer.lib.core.net.callback.ISuccess;
 import com.archer.lib.core.util.log.LatteLogger;
 import com.archer.lib.ec.R;
-import com.archer.lib.ec.R2;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by Archer on 2018/2/9.
  */
 
 public class SignUpDelegate extends LatteDelegate {
-    @BindView(R2.id.edit_sign_up_name)
     TextInputEditText mNameEt;
-    @BindView(R2.id.edit_sign_up_email)
     TextInputEditText mEmailEt;
-    @BindView(R2.id.edit_sign_up_phone)
     TextInputEditText mPhoneEt;
-    @BindView(R2.id.edit_sign_up_password)
     TextInputEditText mPasswordEt;
-    @BindView(R2.id.edit_sign_up_re_password)
     TextInputEditText mRePasswordEt;
 
     private ISignListener mISignListener;
@@ -45,13 +36,12 @@ public class SignUpDelegate extends LatteDelegate {
         }
     }
 
-    @OnClick(R2.id.btn_sign_up)
     void onClickSignUp() {
         if (checkForm()) {
             Toast.makeText(Latte.getApplicationContext(), "验证通过", Toast.LENGTH_SHORT).show();
             RestClient.builder()
-//                    .url("http://127.0.0.1/index")
-                    .url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
+                    //.url("http://192.168.1.145:8080/RestServer/api/user_profile.php")
+                    .url("user_profile.php")
                     .params("name", mNameEt.getText().toString())
                     .params("email", mNameEt.getText().toString())
                     .params("phone", mNameEt.getText().toString())
@@ -69,9 +59,8 @@ public class SignUpDelegate extends LatteDelegate {
         }
     }
 
-    @OnClick(R2.id.tv_link_sign_in)
     void onClickLink() {
-        start(new SignInDelegate());
+        getSupportDelegate().start(new SignInDelegate());
     }
 
     private boolean checkForm() {
@@ -123,6 +112,24 @@ public class SignUpDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        mNameEt = $(R.id.edit_sign_up_name);
+        mEmailEt = $(R.id.edit_sign_up_email);
+        mPhoneEt = $(R.id.edit_sign_up_phone);
+        mPasswordEt = $(R.id.edit_sign_up_password);
+        mRePasswordEt = $(R.id.edit_sign_up_re_password);
 
+        $(R.id.btn_sign_up).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSignUp();
+            }
+        });
+
+        $(R.id.tv_link_sign_in).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickLink();
+            }
+        });
     }
 }

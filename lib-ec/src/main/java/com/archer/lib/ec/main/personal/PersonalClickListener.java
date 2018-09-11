@@ -1,11 +1,11 @@
-package com.flj.latte.ec.main.personal;
+package com.archer.lib.ec.main.personal;
 
 import android.view.View;
 
+import com.archer.lib.core.delegates.LatteDelegate;
+import com.archer.lib.ec.main.personal.list.ListBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.ec.main.personal.list.ListBean;
 
 /**
  * Created by 傅令杰
@@ -22,16 +22,9 @@ public class PersonalClickListener extends SimpleClickListener {
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         final ListBean bean = (ListBean) baseQuickAdapter.getData().get(position);
-        int id = bean.getId();
-        switch (id) {
-            case 1:
-                DELEGATE.getParentDelegate().getSupportDelegate().start(bean.getDelegate());
-                break;
-            case 2:
-                DELEGATE.getParentDelegate().getSupportDelegate().start(bean.getDelegate());
-                break;
-            default:
-                break;
+        LatteDelegate delegate = bean.getDelegate();
+        if (delegate != null) {
+            DELEGATE.getParentDelegate().getSupportDelegate().start(delegate);
         }
     }
 

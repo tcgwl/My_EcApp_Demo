@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.personal.settings;
+package com.archer.lib.ec.main.personal.settings;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,14 +7,10 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
-import com.diabin.latte.ec.R;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.net.RestClient;
-import com.flj.latte.net.callback.ISuccess;
-
-/**
- * Created by 傅令杰
- */
+import com.archer.lib.core.delegates.LatteDelegate;
+import com.archer.lib.core.net.RestClient;
+import com.archer.lib.core.net.callback.ISuccess;
+import com.archer.lib.ec.R;
 
 public class AboutDelegate extends LatteDelegate {
 

@@ -1,4 +1,4 @@
-package com.flj.latte.ec.pay;
+package com.archer.lib.ec.pay;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -12,21 +12,18 @@ import android.view.WindowManager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.diabin.latte.ec.R;
-import com.flj.latte.app.ConfigKeys;
-import com.flj.latte.app.Latte;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.net.RestClient;
-import com.flj.latte.net.callback.ISuccess;
-import com.flj.latte.ui.loader.LatteLoader;
-import com.flj.latte.util.log.LatteLogger;
-import com.flj.latte.wechat.LatteWeChat;
+import com.archer.lib.core.app.ConfigKeys;
+import com.archer.lib.core.app.Latte;
+import com.archer.lib.core.delegates.LatteDelegate;
+import com.archer.lib.core.net.RestClient;
+import com.archer.lib.core.net.callback.IFailure;
+import com.archer.lib.core.net.callback.ISuccess;
+import com.archer.lib.core.ui.loader.LatteLoader;
+import com.archer.lib.core.util.log.LatteLogger;
+import com.archer.lib.core.wechat.LatteWeChat;
+import com.archer.lib.ec.R;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-
-/**
- * Created by 傅令杰
- */
 
 public class FastPay implements View.OnClickListener {
 
@@ -91,6 +88,12 @@ public class FastPay implements View.OnClickListener {
                         payAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, paySign);
                     }
                 })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure() {
+                        LatteLogger.d("PAY_SIGN", "alPay failure");
+                    }
+                })
                 .build()
                 .post();
     }
@@ -127,6 +130,12 @@ public class FastPay implements View.OnClickListener {
                         payReq.sign = paySign;
 
                         iwxapi.sendReq(payReq);
+                    }
+                })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure() {
+                        LatteLogger.d("WX_PAY", "weChatPay failure");
                     }
                 })
                 .build()

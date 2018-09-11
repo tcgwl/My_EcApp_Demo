@@ -35,6 +35,9 @@ public class DemoApp extends Application {
                 .withInterceptor(new DebugInterceptor("index.php", R.raw.index_data))
                 .withInterceptor(new DebugInterceptor("sort_list.php", R.raw.sort_list_data))
                 .withInterceptor(new DebugInterceptor("sort_content_list.php", R.raw.sort_content_data_1))
+                .withInterceptor(new DebugInterceptor("shop_cart.php", R.raw.shop_cart_data))
+                .withInterceptor(new DebugInterceptor("shop_cart_count.php", R.raw.shop_cart_data))
+                .withInterceptor(new DebugInterceptor("order_list.php", R.raw.order_list))
                 .configure();
 //        initStetho();
         DatabaseManager.getInstance().init(this);

@@ -1,9 +1,9 @@
-package com.flj.latte.ec.main.personal.list;
+package com.archer.lib.ec.main.personal.list;
 
 import android.widget.CompoundButton;
 
+import com.archer.lib.core.delegates.LatteDelegate;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.flj.latte.delegates.LatteDelegate;
 
 /**
  * Created by 傅令杰
@@ -19,7 +19,7 @@ public class ListBean implements MultiItemEntity {
     private LatteDelegate mDelegate = null;
     private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = null;
 
-    public ListBean(int mItemType, String mImageUrl, String mText, String mValue, int mId, LatteDelegate mDelegate, CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener) {
+    ListBean(int mItemType, String mImageUrl, String mText, String mValue, int mId, LatteDelegate mDelegate, CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener) {
         this.mItemType = mItemType;
         this.mImageUrl = mImageUrl;
         this.mText = mText;
@@ -55,7 +55,7 @@ public class ListBean implements MultiItemEntity {
         return mDelegate;
     }
 
-    public CompoundButton.OnCheckedChangeListener getmOnCheckedChangeListener() {
+    public CompoundButton.OnCheckedChangeListener getOnCheckedChangeListener() {
         return mOnCheckedChangeListener;
     }
 

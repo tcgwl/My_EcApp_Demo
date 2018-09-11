@@ -16,13 +16,9 @@ import com.archer.lib.core.util.storage.LattePreference;
 import com.archer.lib.core.util.timer.BaseTimerTask;
 import com.archer.lib.core.util.timer.ITimerListener;
 import com.archer.lib.ec.R;
-import com.archer.lib.ec.R2;
 
 import java.text.MessageFormat;
 import java.util.Timer;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by Archer on 2018/2/8.
@@ -32,7 +28,6 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
     private Timer mTimer = null;
     private int mCount = 5;
 
-    @BindView(R2.id.tv_launcher_timer)
     AppCompatTextView mTvTimer = null;
 
     private ILauncherListener mILauncherListener;
@@ -45,7 +40,6 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         }
     }
 
-    @OnClick(R2.id.tv_launcher_timer)
     void onClickTimerView() {
         if (mTimer != null) {
             mTimer.cancel();
@@ -68,6 +62,13 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         initTimer();
+        mTvTimer = $(R.id.tv_launcher_timer);
+        mTvTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickTimerView();
+            }
+        });
     }
 
     /**
@@ -75,7 +76,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
      */
     private void checkIsShowScroll() {
         if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否已登录
             AccountManager.checkAccount(new IUserChecker() {

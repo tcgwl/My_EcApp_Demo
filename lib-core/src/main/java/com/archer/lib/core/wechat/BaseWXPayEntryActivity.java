@@ -1,11 +1,7 @@
-package com.flj.latte.wechat;
+package com.archer.lib.core.wechat;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-
-/**
- * Created by 傅令杰
- */
 
 public abstract class BaseWXPayEntryActivity extends BaseWXActivity {
 

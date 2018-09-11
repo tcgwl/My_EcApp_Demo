@@ -1,4 +1,4 @@
-package com.flj.latte.ui.widget;
+package com.archer.lib.core.ui.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;

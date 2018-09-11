@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.archer.lib.core.R;
-import com.archer.lib.core.R2;
 import com.archer.lib.core.delegates.LatteDelegate;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -19,8 +18,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * Created by Archer on 2018/2/27.
@@ -34,7 +32,6 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     //打开app后展示页面的索引
     private int mIndexDelegate = 0;
     private int mClickedColor = Color.RED;
-    @BindView(R2.id.bottom_bar)
     LinearLayoutCompat mBottomBar = null;
 
     public abstract LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder);
@@ -43,6 +40,10 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
 
     @ColorInt
     public abstract int setClickedColor();
+
+    public ArrayList<BottomItemDelegate> getItemDelegates() {
+        return ITEM_DELEGATES;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +71,8 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        mBottomBar = $(R.id.bottom_bar);
+
         final int size = ITEMS.size();
         for (int i = 0; i < size; i++) {
             LayoutInflater.from(getContext()).inflate(R.layout.bottom_item_icon_text_layout, mBottomBar);
@@ -89,8 +92,9 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
             }
         }
 
-        final SupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new SupportFragment[size]);
+        final ISupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
         getSupportDelegate().loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArray);
+
     }
 
     private void resetColor() {
@@ -104,18 +108,26 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         }
     }
 
-    @Override
-    public void onClick(View v) {
+    public void changeColor(int tabIndex) {
         resetColor();
-        final RelativeLayout item = (RelativeLayout) v;
+        final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(tabIndex);
         final IconTextView itemIcon = (IconTextView) item.getChildAt(0);
         itemIcon.setTextColor(mClickedColor);
         final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
         itemTitle.setTextColor(mClickedColor);
-        final int tag = (int) v.getTag();
-        getSupportDelegate().showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
+    }
+
+    public void setCurrentDelegate(int index) {
+        mCurrentDelegate = index;
+    }
+
+    @Override
+    public void onClick(View v) {
+        final int tabIndex = (int) v.getTag();
+        changeColor(tabIndex);
+        getSupportDelegate().showHideFragment(ITEM_DELEGATES.get(tabIndex), ITEM_DELEGATES.get(mCurrentDelegate));
         //注意先后顺序
-        mCurrentDelegate = tag;
+        mCurrentDelegate = tabIndex;
     }
 
 }

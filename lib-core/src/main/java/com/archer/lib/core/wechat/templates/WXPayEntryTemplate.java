@@ -1,15 +1,38 @@
 package com.archer.lib.core.wechat.templates;
 
-import com.archer.lib.core.activities.ProxyActivity;
-import com.archer.lib.core.delegates.LatteDelegate;
+import android.widget.Toast;
+
+import com.archer.lib.core.wechat.BaseWXPayEntryActivity;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
 
 /**
  * Created by Archer on 2018/2/26.
  */
 
-public class WXPayEntryTemplate extends ProxyActivity {
+public class WXPayEntryTemplate extends BaseWXPayEntryActivity {
     @Override
-    public LatteDelegate setRootDelegate() {
-        return null;
+    protected void onPaySuccess() {
+        Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onPayFail() {
+        Toast.makeText(this, "支付失败", Toast.LENGTH_SHORT).show();
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onPayCancel() {
+        Toast.makeText(this, "支付取消", Toast.LENGTH_SHORT).show();
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+
     }
 }

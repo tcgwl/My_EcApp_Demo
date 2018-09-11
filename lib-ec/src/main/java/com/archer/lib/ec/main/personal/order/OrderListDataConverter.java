@@ -1,11 +1,11 @@
-package com.flj.latte.ec.main.personal.order;
+package com.archer.lib.ec.main.personal.order;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.flj.latte.ui.recycler.DataConverter;
-import com.flj.latte.ui.recycler.MultipleFields;
-import com.flj.latte.ui.recycler.MultipleItemEntity;
+import com.archer.lib.core.ui.recycler.DataConverter;
+import com.archer.lib.core.ui.recycler.MultipleFields;
+import com.archer.lib.core.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,6 @@ public class OrderListDataConverter extends DataConverter {
             final int id = data.getInteger("id");
             final double price = data.getDouble("price");
             final String time = data.getString("time");
-
 
             final MultipleItemEntity entity = MultipleItemEntity.builder()
                     .setItemType(OrderListItemType.ITEM_ORDER_LIST)

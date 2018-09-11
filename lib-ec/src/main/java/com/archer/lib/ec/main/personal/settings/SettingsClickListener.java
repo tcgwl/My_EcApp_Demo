@@ -1,11 +1,11 @@
-package com.flj.latte.ec.main.personal.settings;
+package com.archer.lib.ec.main.personal.settings;
 
 import android.view.View;
 
+import com.archer.lib.core.delegates.LatteDelegate;
+import com.archer.lib.ec.main.personal.list.ListBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.ec.main.personal.list.ListBean;
 
 /**
  * Created by 傅令杰

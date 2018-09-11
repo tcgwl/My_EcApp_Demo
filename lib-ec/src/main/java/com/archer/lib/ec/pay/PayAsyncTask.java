@@ -1,15 +1,11 @@
-package com.flj.latte.ec.pay;
+package com.archer.lib.ec.pay;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.alipay.sdk.app.PayTask;
-import com.flj.latte.ui.loader.LatteLoader;
-import com.flj.latte.util.log.LatteLogger;
-
-/**
- * Created by 傅令杰
- */
+import com.archer.lib.core.ui.loader.LatteLoader;
+import com.archer.lib.core.util.log.LatteLogger;
 
 public class PayAsyncTask extends AsyncTask<String, Void, String> {
 
@@ -44,7 +40,7 @@ public class PayAsyncTask extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
         LatteLoader.stopLoading();
         final PayResult payResult = new PayResult(result);
-        // 支付宝返回此次支付结构及加签，建议对支付宝签名信息拿签约是支付宝提供的公钥做验签
+        // 支付宝返回此次支付结果及加签，建议对支付宝签名信息拿签约时支付宝提供的公钥做验签
         final String resultInfo = payResult.getResult();
         final String resultStatus = payResult.getResultStatus();
         LatteLogger.d("AL_PAY_RESULT", resultInfo);

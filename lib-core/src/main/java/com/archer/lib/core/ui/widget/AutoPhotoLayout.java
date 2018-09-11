@@ -1,4 +1,4 @@
-package com.flj.latte.ui.widget;
+package com.archer.lib.core.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,11 +15,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 
+import com.archer.lib.core.R;
+import com.archer.lib.core.delegates.LatteDelegate;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.ui.R;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;

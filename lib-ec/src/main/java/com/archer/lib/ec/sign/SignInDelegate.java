@@ -18,19 +18,13 @@ import com.archer.lib.core.util.log.LatteLogger;
 import com.archer.lib.core.wechat.LatteWeChat;
 import com.archer.lib.core.wechat.callbacks.IWeChatSignInCallback;
 import com.archer.lib.ec.R;
-import com.archer.lib.ec.R2;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by Archer on 2018/2/9.
  */
 
-public class SignInDelegate extends LatteDelegate {
-    @BindView(R2.id.edit_sign_in_email)
+public class SignInDelegate extends LatteDelegate implements View.OnClickListener {
     TextInputEditText mEmailEt;
-    @BindView(R2.id.edit_sign_in_password)
     TextInputEditText mPasswordEt;
 
     private ISignListener mISignListener;
@@ -43,7 +37,6 @@ public class SignInDelegate extends LatteDelegate {
         }
     }
 
-    @OnClick(R2.id.btn_sign_in)
     void onClickSignIn() {
         if (checkForm()) {
             Toast.makeText(Latte.getApplicationContext(), "验证通过", Toast.LENGTH_SHORT).show();
@@ -77,7 +70,6 @@ public class SignInDelegate extends LatteDelegate {
         }
     }
 
-    @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat() {
         Toast.makeText(Latte.getApplicationContext(), "微信登录", Toast.LENGTH_SHORT).show();
         LatteWeChat
@@ -91,9 +83,8 @@ public class SignInDelegate extends LatteDelegate {
                 .signIn();
     }
 
-    @OnClick(R2.id.tv_link_sign_up)
     void onClickLink() {
-        start(new SignUpDelegate());
+        getSupportDelegate().start(new SignUpDelegate());
     }
 
     private boolean checkForm() {
@@ -124,6 +115,22 @@ public class SignInDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        mEmailEt = $(R.id.edit_sign_in_email);
+        mPasswordEt = $(R.id.edit_sign_in_password);
+        $(R.id.btn_sign_in).setOnClickListener(this);
+        $(R.id.tv_link_sign_up).setOnClickListener(this);
+        $(R.id.icon_sign_in_wechat).setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.btn_sign_in) {
+            onClickSignIn();
+        } else if (i == R.id.tv_link_sign_up) {
+            onClickLink();
+        } else if (i == R.id.icon_sign_in_wechat) {
+            onClickWeChat();
+        }
     }
 }
